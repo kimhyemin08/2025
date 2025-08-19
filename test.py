@@ -1,59 +1,44 @@
 import streamlit as st
-import random
 
-st.title("🏆 남자 캐릭터 이상형 월드컵")
+st.title("🌟 당신이 좋아할 남자 캐릭터는?")
 
 characters = {
-    "백이진 (남주혁)": {"drama": "스물다섯 스물하나", "quote": "오늘도 뉴스 읽어주러 왔습니다 📺"},
-    "문지웅 (최현욱)": {"drama": "스물다섯 스물하나", "quote": "야~ 우리 오늘도 재밌게 놀자!"},
-    "배견우 (추영우)": {"drama": "견우와 선녀", "quote": "괜히 다가오지 마… 하지만 넌 괜찮아."},
-    "안수호 (최현욱)": {"drama": "약한 영웅 Class 1", "quote": "내 친구 건드리면 가만 안 둬."},
-    "박후민 (려운)": {"drama": "약한 영웅 Class 2", "quote": "대장은 내가 한다. 따라와 💪"},
-    "서준태 (최민영)": {"drama": "약한 영웅 Class 2", "quote": "나? 겉으론 순해 보여도 만만하게 보면 안 돼."},
-    "금성제 (이준영)": {"drama": "약한 영웅 Class 2", "quote": "흥, 다 귀찮네. 그래도 넌 맘에 들어."}
+    "백이진 (남주혁)": {
+        "desc": "책임감 있고 따뜻한 현실파 신사.",
+        "drama": "스물다섯 스물하나"
+    },
+    "문지웅 (최현욱)": {
+        "desc": "밝고 유쾌한 분위기 메이커 친구.",
+        "drama": "스물다섯 스물하나"
+    },
+    "배견우 (추영우)": {
+        "desc": "차갑지만 내면은 따뜻한 경계심 많은 소년.",
+        "drama": "견우와 선녀"
+    },
+    "안수호 (최현욱)": {
+        "desc": "친구에게 헌신적인 보호자 타입.",
+        "drama": "약한 영웅 Class 1"
+    },
+    "박후민 (려운)": {
+        "desc": "호쾌하고 대장다운 힘 캐, 친구들을 포용하는 타입.",
+        "drama": "약한 영웅 Class 2"
+    },
+    "서준태 (최민영)": {
+        "desc": "언뜻 순해 보이지만 속은 깊고 복잡한 인물.",
+        "drama": "약한 영웅 Class 2"
+    },
+    "금성제 (이준영)": {
+        "desc": "자유롭고 냉소적이며 예측 불가능한 인물.",
+        "drama": "약한 영웅 Class 2"
+    }
 }
 
-# 세션 상태 초기화
-if "rounds" not in st.session_state:
-    st.session_state.rounds = list(characters.keys())
-    random.shuffle(st.session_state.rounds)
-    st.session_state.winners = []
+options = [info["desc"] for info in characters.values()]
+choice = st.radio("가장 끌리는 성격을 선택하세요:", options)
 
-# 라운드 진행
-if len(st.session_state.rounds) >= 2:
-    c1, c2 = st.session_state.rounds[:2]
-
-    st.write("🔥 대결! 둘 중 누가 더 마음에 드나요?")
-    col1, col2 = st.columns(2)
-
-    with col1:
-        if st.button(f"{c1}"):
-            st.session_state.winners.append(c1)
-            st.session_state.rounds = st.session_state.rounds[2:]
-
-    with col2:
-        if st.button(f"{c2}"):
-            st.session_state.winners.append(c2)
-            st.session_state.rounds = st.session_state.rounds[2:]
-
-# 라운드 종료 → 다음 라운드 셋업
-elif len(st.session_state.rounds) == 0 and len(st.session_state.winners) > 1:
-    st.session_state.rounds = st.session_state.winners
-    st.session_state.winners = []
-    random.shuffle(st.session_state.rounds)
-    st.success("👉 다음 라운드로 진출합니다!")
-
-# 최종 결과
-elif len(st.session_state.winners) == 1:
-    winner = st.session_state.winners[0]
-    info = characters[winner]
-    st.balloons()
-    st.header(f"💖 최종 우승 캐릭터는: {winner}!")
-    st.write(f"({info['drama']})")
-    st.write(f"🗨️ {info['quote']}")
-    st.write(f"✨ 당신과의 싱크로율: {random.randint(70, 100)}%")
-
-    if st.button("다시 하기"):
-        st.session_state.rounds = list(characters.keys())
-        random.shuffle(st.session_state.rounds)
-        st.session_state.winners = []
+if choice:
+    for name, info in characters.items():
+        if info["desc"] == choice:
+            st.subheader("💖 당신이 좋아할 남자 캐릭터는:")
+            st.write(f"**{name} — {info['drama']}**")
+            st.write(info["desc"])
