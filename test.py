@@ -1,58 +1,44 @@
 import streamlit as st
 
+st.title("🌟 당신이 좋아할 남자 캐릭터는?")
+
 characters = {
-    "나희도 (김태리)": {
-        "desc": "밝고 열정적이며, 절대 포기하지 않는 긍정적인 성격.",
-        "drama": "스물다섯 스물하나",
-        "img": "url_to_nahee_do_image"
-    },
     "백이진 (남주혁)": {
-        "desc": "따뜻하고 책임감 넘치며, 성실한 노력파.",
-        "drama": "스물다섯 스물하나",
-        "img": "url_to_baek_i_jin_image"
+        "desc": "책임감 있고 따뜻한 현실파 신사.",
+        "drama": "스물다섯 스물하나"
+    },
+    "문지웅 (최현욱)": {
+        "desc": "밝고 유쾌한 분위기 메이커 친구.",
+        "drama": "스물다섯 스물하나"
     },
     "배견우 (추영우)": {
-        "desc": "차가운 듯 하지만 내면은 따뜻한, 스스로를 지키려는 소년.",
-        "drama": "견우와 선녀",
-        "img": "url_to_gyunwoo_image"
+        "desc": "차갑지만 내면은 따뜻한 경계심 많은 소년.",
+        "drama": "견우와 선녀"
     },
-    "박성아 (조이현)": {
-        "desc": "직진적이고 용감한, 첫사랑을 위해 무엇이든 하는 소녀.",
-        "drama": "견우와 선녀",
-        "img": "url_to_sung_a_image"
+    "안수호 (최현욱)": {
+        "desc": "친구에게 헌신적인 보호자 타입.",
+        "drama": "약한 영웅 Class 1"
     },
-    "표지호 (차강윤)": {
-        "desc": "순정적이고 조력자 타입, 묵묵한 감정 표현.",
-        "drama": "견우와 선녀",
-        "img": "url_to_jiho_image"
+    "박후민 (려운)": {
+        "desc": "호쾌하고 대장다운 힘 캐, 친구들을 포용하는 타입.",
+        "drama": "약한 영웅 Class 2"
     },
-    "연시은 (박지훈)": {
-        "desc": "침착하고 분석적인 이성파.",
-        "drama": "약한 영웅 Class 1",
-        "img": "url_to_yunsieun_image"
+    "서준태 (최민영)": {
+        "desc": "언뜻 순해 보이지만 속은 깊고 복잡한 인물.",
+        "drama": "약한 영웅 Class 2"
     },
-    "수호 (최현욱)": {
-        "desc": "충성스럽고 따뜻한 친구.",
-        "drama": "약한 영웅 Class 1",
-        "img": "url_to_suho_image"
-    },
-    "범석 (홍경민)": {
-        "desc": "솔직하고 감정 표현이 풍부한 성격.",
-        "drama": "약한 영웅 Class 1",
-        "img": "url_to_beomseok_image"
+    "금성제 (이준영)": {
+        "desc": "자유롭고 냉소적이며 예측 불가능한 인물.",
+        "drama": "약한 영웅 Class 2"
     }
 }
 
-st.title("🌟 내가 가장 좋아할 캐릭터는?")
-
 options = [info["desc"] for info in characters.values()]
-choice = st.radio("마음에 드는 성격을 골라보세요:", options)
+choice = st.radio("가장 끌리는 성격을 선택하세요:", options)
 
 if choice:
     for name, info in characters.items():
         if info["desc"] == choice:
-            st.subheader("💖 당신이 좋아할 캐릭터는:")
-            st.write(f"**{name}** — {info['drama']}")
+            st.subheader("💖 당신이 좋아할 남자 캐릭터는:")
+            st.write(f"**{name} — {info['drama']}**")
             st.write(info["desc"])
-            st.image(info["img"], caption=f"{name} ({info['drama']})")
-
