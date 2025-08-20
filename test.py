@@ -3,7 +3,7 @@ import random
 
 st.title("🏆 남자 캐릭터 성격 월드컵")
 
-# 이름 대신 '성격 설명'만 먼저 보여주기
+# 캐릭터 데이터 (이름, 성격 설명, 드라마, 명대사)
 characters = {
     "백이진 (남주혁)": {
         "desc": "겉으로는 성실한 기자지만, 속으로는 누구보다 따뜻하게 챙겨주는 타입.",
@@ -42,15 +42,17 @@ characters = {
     }
 }
 
+# 초기 세팅
 if "rounds" not in st.session_state:
     st.session_state.rounds = list(characters.keys())
     random.shuffle(st.session_state.rounds)
     st.session_state.winners = []
 
+# 라운드 진행
 if len(st.session_state.rounds) >= 2:
     c1, c2 = st.session_state.rounds[:2]
 
-    st.write("🔥 둘 중 어떤 성격이 더 끌리나요?")
+    st.subheader("🔥 둘 중 어떤 성격이 더 끌리나요?")
     col1, col2 = st.columns(2)
 
     with col1:
@@ -65,20 +67,23 @@ if len(st.session_state.rounds) >= 2:
             st.session_state.winners.append(c2)
             st.session_state.rounds = st.session_state.rounds[2:]
 
+# 라운드 종료 후 다음 라운드로
 elif len(st.session_state.rounds) == 0 and len(st.session_state.winners) > 1:
     st.session_state.rounds = st.session_state.winners
     st.session_state.winners = []
     random.shuffle(st.session_state.rounds)
     st.success("👉 다음 라운드로 진출!")
 
+# 최종 결과 공개
 elif len(st.session_state.winners) == 1:
     winner = st.session_state.winners[0]
     info = characters[winner]
     st.balloons()
-    st.header(f"💖 당신의 이상형은: {winner}!")
+    st.header(f"💖 당신이 선택한 이상형 캐릭터는...")
+    st.subheader(f"✨ {winner} ✨")
     st.write(f"📺 출연작: {info['drama']}")
     st.write(f"🗨️ 명대사: {info['quote']}")
-    st.write(f"✨ 당신과의 싱크로율: {random.randint(70, 100)}%")
+    st.write(f"🔮 당신과의 싱크로율: {random.randint(70, 100)}%")
 
     if st.button("다시 하기"):
         st.session_state.rounds = list(characters.keys())
