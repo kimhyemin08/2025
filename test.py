@@ -64,10 +64,10 @@ if st.session_state.step < len(questions):
     q = questions[st.session_state.step]
     st.subheader(q["q"])
     for key, (text, category) in q["options"].items():
-        if st.button(text):
+        if st.button(text, key=f"{st.session_state.step}_{key}"):
             st.session_state.answers.append(category)
             st.session_state.step += 1
-            st.experimental_rerun()
+            st.rerun()   # ✅ 수정: experimental_rerun → rerun
 
 # 결과 계산
 else:
@@ -81,3 +81,4 @@ else:
     if st.button("🔁 다시 하기"):
         st.session_state.step = 0
         st.session_state.answers = []
+        st.rerun()
