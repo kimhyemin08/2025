@@ -2,7 +2,7 @@ import streamlit as st
 import random
 
 st.title("🔮 꿈 진로 심리테스트")
-st.write("당신의 성격으로 알아보는 미래의 진로 타입!")
+st.write("성격으로 알아보는 나의 숨은 진로 타입!")
 
 # 질문/선택지 데이터
 questions = [
@@ -31,6 +31,24 @@ questions = [
             "b": ("여행 다니며 사진 찍는 나", "creator"),
             "c": ("경기장에서 우승컵 드는 나", "athlete"),
             "d": ("강의실에서 발표하는 나", "mentor")
+        }
+    },
+    {
+        "q": "여행을 간다면 나는?",
+        "options": {
+            "a": ("친구들이랑 단체로 신나게!", "idol"),
+            "b": ("혼자 카메라 들고 자유여행", "creator"),
+            "c": ("액티비티 빡세게 즐기기", "athlete"),
+            "d": ("계획표 짜고 차분하게", "mentor")
+        }
+    },
+    {
+        "q": "단톡방에서 나는 주로?",
+        "options": {
+            "a": ("분위기 살리는 드립러", "idol"),
+            "b": ("눈팅하다 필요할 때만 톡", "creator"),
+            "c": ("갑자기 번개 제안하는 사람", "athlete"),
+            "d": ("공지사항 정리해주는 사람", "mentor")
         }
     }
 ]
@@ -67,7 +85,7 @@ if st.session_state.step < len(questions):
         if st.button(text, key=f"{st.session_state.step}_{key}"):
             st.session_state.answers.append(category)
             st.session_state.step += 1
-            st.rerun()   # ✅ 수정: experimental_rerun → rerun
+            st.rerun()
 
 # 결과 계산
 else:
